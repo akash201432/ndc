@@ -265,6 +265,36 @@ iptables -D INPUT 1
 iptables destroy chai
 
 
+OSSEC Commands Cheat Sheet
+# Dependencies (Ubuntu/Debian)
+sudo apt update
+sudo apt install build-essential make zlib1g-dev libpcre2-dev libevent-dev libssl-dev libcurl4-openss
+# Dependencies (RHEL/CentOS/Rocky/AlmaLinux)
+sudo dnf groupinstall "Development Tools" -y
+sudo dnf install zlib-devel pcre2-devel libevent-devel openssl-devel libcurl-devel -y
+# Download OSSEC
+wget https://github.com/ossec/ossec-hids/archive/refs/tags/3.7.0.tar.gz
+tar -xvzf 3.7.0.tar.gz
+cd ossec-hids-3.7.0/
+# Install
+sudo ./install.sh
+# UFW
+sudo ufw allow 1514/udp
+# Firewalld
+sudo firewall-cmd --add-port=1514/udp --permanent
+sudo firewall-cmd --reload
+# Server Agent Management
+sudo /var/ossec/bin/manage_agents
+# Client Import Key
+sudo /var/ossec/bin/manage_agents
+# Start OSSEC
+sudo /var/ossec/bin/ossec-control start
+# Restart OSSEC
+sudo /var/ossec/bin/ossec-control restart
+# Stop OSSEC
+sudo /var/ossec/bin/ossec-control stop
+# Verify Connected Agents
+sudo /var/ossec/bin/agent_control -l
 
 
 
